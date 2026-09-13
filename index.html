@@ -16,21 +16,31 @@ main{max-width:1120px;margin:auto;padding:20px 16px 100px}.hero{display:flex;ali
 .notice{padding:12px;border-radius:12px;background:#f0f0ed;margin:10px 0}.success{background:#eaf7ef;color:#176b3b}.error{background:#fff0ef;color:#a51e15}
 #admin{display:none}.adminbar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:15px}.tab{padding:9px 12px;border:1px solid var(--line);border-radius:10px;background:#fff}.tab.active{background:#111;color:#fff}.orders{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.order,.panel{background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px}.order h3{margin:0}.order ul{margin:9px 0;padding-left:19px}.status{font-size:12px;color:var(--muted);margin:4px 0 9px}.actions{display:flex;gap:7px;margin-top:11px}.actions button{flex:1;padding:9px;border-radius:10px;border:0;background:#eee}.actions .next{background:#111;color:#fff}.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.formgrid .wide{grid-column:1/-1}.listrow{display:grid;grid-template-columns:1fr auto auto;gap:8px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}.qrgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.qr{background:#fff;border:1px solid var(--line);border-radius:14px;padding:10px;text-align:center}.qr canvas{max-width:100%;height:auto!important}.login{max-width:420px;margin:50px auto}.empty{text-align:center;padding:35px;color:var(--muted)}
 @media(max-width:800px){.grid{grid-template-columns:repeat(2,1fr)}.orders{grid-template-columns:1fr}.qrgrid{grid-template-columns:repeat(2,1fr)}}@media(max-width:520px){.hero h1{font-size:24px}.hero img{width:70px;height:70px}.grid{gap:10px}.body{padding:10px}}
+.drink-note{font-size:11px;color:#7a7a7a;margin-top:6px;display:flex;align-items:center;gap:5px}.drink-note:before{content:"✓";font-weight:900;color:#111}.card{cursor:pointer;-webkit-tap-highlight-color:transparent}.handle{width:42px;height:5px;border-radius:999px;background:#d7d7d7;margin:0 auto 12px}.option-summary{background:#f6f6f4;border-radius:16px;padding:12px 13px;margin:12px 0;font-size:13px}.option-summary b{display:block;margin-bottom:3px}.option-price{font-size:18px;font-weight:900}.sheet{padding-bottom:max(20px,env(safe-area-inset-bottom))}.modal{backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
 </style>
 
-<style id="uno-motion-v2">
+<style id="uno-motion-v3">
 @media (prefers-reduced-motion: no-preference){
-  .card{animation:unoCardIn .38s cubic-bezier(.2,.8,.2,1) both;transition:transform .22s ease,box-shadow .22s ease,opacity .22s ease}
-  .card:hover{transform:translateY(-3px);box-shadow:0 10px 28px rgba(0,0,0,.09)}
-  .card:nth-child(2n){animation-delay:.035s}.card:nth-child(3n){animation-delay:.07s}
-  .card button,.addBtn,button{transition:transform .13s ease,filter .18s ease}
-  .card button:active,.addBtn:active,button:active{transform:scale(.94)}
-  .chip,.cat,.category-btn{transition:transform .18s ease,background .2s ease,color .2s ease,border-color .2s ease}
-  .chip:active,.cat:active,.category-btn:active{transform:scale(.96)}
-  .modal,.sheet,.drawer,.cart-modal,.cartSheet{animation:unoSheetIn .28s cubic-bezier(.2,.8,.2,1) both}
-  #cartModal>div,.modal>div,.sheet>div{animation:unoSheetIn .28s cubic-bezier(.2,.8,.2,1) both}
-  @keyframes unoCardIn{from{opacity:0;transform:translateY(12px) scale(.985)}to{opacity:1;transform:translateY(0) scale(1)}}
-  @keyframes unoSheetIn{from{opacity:0;transform:translateY(22px) scale(.985)}to{opacity:1;transform:translateY(0) scale(1)}}
+  :root{--spring:cubic-bezier(.22,1,.36,1);--press:cubic-bezier(.2,.8,.2,1)}
+  html{scroll-behavior:smooth}
+  .card{animation:unoCardIn .48s var(--spring) both;transition:transform .34s var(--spring),box-shadow .34s var(--spring),opacity .22s ease}
+  .card:nth-child(2n){animation-delay:.025s}.card:nth-child(3n){animation-delay:.05s}.card:nth-child(4n){animation-delay:.075s}
+  .card:hover{transform:translateY(-4px) scale(1.012);box-shadow:0 14px 34px rgba(0,0,0,.10)}
+  .card:active{transform:scale(.975);transition-duration:.12s}
+  button,.cat,.add{transition:transform .24s var(--spring),background .24s ease,color .24s ease,box-shadow .24s ease;will-change:transform}
+  button:active,.cat:active,.add:active{transform:scale(.94)}
+  .cat.active{transform:scale(1.03);box-shadow:0 5px 18px rgba(0,0,0,.10)}
+  .cart{animation:cartPop .46s var(--spring) both}
+  .modal.open{animation:fadeIn .22s ease both}
+  .modal.open .sheet{animation:sheetSpring .48s cubic-bezier(.2,1.18,.32,1) both;transform-origin:bottom center}
+  .choice button.active{animation:choicePop .28s var(--spring) both}
+  .optrow{transition:background .2s ease,transform .2s var(--spring);border-radius:12px;padding-left:8px;padding-right:8px}
+  .optrow:active{transform:scale(.985);background:#f7f7f5}
+  @keyframes unoCardIn{from{opacity:0;transform:translateY(18px) scale(.965)}to{opacity:1;transform:translateY(0) scale(1)}}
+  @keyframes sheetSpring{0%{opacity:0;transform:translateY(56px) scale(.96)}65%{opacity:1;transform:translateY(-4px) scale(1.006)}100%{opacity:1;transform:translateY(0) scale(1)}}
+  @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+  @keyframes cartPop{0%{opacity:0;transform:translateX(-50%) translateY(18px) scale(.94)}70%{opacity:1;transform:translateX(-50%) translateY(-2px) scale(1.01)}100%{opacity:1;transform:translateX(-50%) translateY(0) scale(1)}}
+  @keyframes choicePop{0%{transform:scale(.92)}70%{transform:scale(1.045)}100%{transform:scale(1)}}
 }
 </style>
 </head>
@@ -56,8 +66,8 @@ main{max-width:1120px;margin:auto;padding:20px 16px 100px}.hero{display:flex;ali
 </main>
 
 <div id="cartBar" class="cart"><span><b id="count">0</b> món • <b id="sum">0đ</b></span><button onclick="openCart()">Xem giỏ hàng</button></div>
-<div id="optionModal" class="modal"><div class="sheet"><div class="sheethead"><h2 id="optionTitle">Chọn món</h2><button class="close" onclick="closeOptions()">×</button></div><div id="optionBody"></div><button id="optionAdd" class="primary" onclick="confirmOptions()">Thêm vào giỏ</button></div></div>
-<div id="modal" class="modal"><div class="sheet"><div class="sheethead"><h2>Giỏ hàng</h2><button class="close" onclick="closeCart()">×</button></div><div id="cartItems"></div><label>Ghi chú</label><textarea id="note" placeholder="Ít đá, ít đường, không topping..."></textarea><div class="total"><span>Tổng</span><span id="modalSum">0đ</span></div><button class="primary" onclick="placeOrder()">Gửi order</button></div></div>
+<div id="optionModal" class="modal"><div class="sheet"><div class="handle"></div><div class="sheethead"><h2 id="optionTitle">Chọn món</h2><button class="close" onclick="closeOptions()">×</button></div><div id="optionBody"></div><button id="optionAdd" class="primary" onclick="confirmOptions()">Thêm vào giỏ</button></div></div>
+<div id="modal" class="modal"><div class="sheet"><div class="handle"></div><div class="sheethead"><h2>Giỏ hàng</h2><button class="close" onclick="closeCart()">×</button></div><div id="cartItems"></div><label>Ghi chú</label><textarea id="note" placeholder="Ít đá, ít đường, không topping..."></textarea><div class="total"><span>Tổng</span><span id="modalSum">0đ</span></div><button class="primary" onclick="placeOrder()">Gửi order</button></div></div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
@@ -67,31 +77,38 @@ const cfg=window.UNO_CONFIG||{}; const ready=cfg.SUPABASE_URL && cfg.SUPABASE_AN
 const sb=ready?supabase.createClient(cfg.SUPABASE_URL,cfg.SUPABASE_ANON_KEY):null;
 const params=new URLSearchParams(location.search); const table=params.get("table")||"—";
 document.getElementById("table").textContent="Bàn "+table;
-let menu=[],cart=JSON.parse(sessionStorage.getItem("uno_cart")||"[]"),adminView="orders",channel=null;
+let menu=[],rawCart=JSON.parse(sessionStorage.getItem("uno_cart")||"[]"),cart=[],adminView="orders",channel=null;
 const money=n=>new Intl.NumberFormat("vi-VN").format(n)+"đ";
-function setCart(){sessionStorage.setItem("uno_cart",JSON.stringify(cart));let c=cart.reduce((a,x)=>a+x.qty,0),s=cart.reduce((a,x)=>a+(menu.find(m=>m.id===x.id)?.price||0)*x.qty,0);document.getElementById("count").textContent=c;document.getElementById("sum").textContent=money(s);document.getElementById("cartBar").style.display=c?"flex":"none";}
-async function loadMenu(){if(!sb){menu=demo;renderMenu();return}let {data,error}=await sb.from("menu_items").select("*").eq("is_available",true).order("sort_order").order("name");if(error){menu=demo;showErr(error.message)}else menu=data.map(x=>({id:x.id,name:x.name,cat:x.category,price:x.price,img:x.image_url||"logo.jpg",desc:x.description||""}));renderCats();renderMenu();}
+const drinkCats=["Trà sữa","Best Seller","Sinh tố","Trà trái cây","Matcha","Coffee","Nước ép","Sữa tươi","Sữa chua","Mojito"];
+function isDrinkCat(cat){return drinkCats.includes(cat)}
+function normalizeCart(){cart=(rawCart||[]).map(x=>{if(x.unitPrice!=null)return x;let m=menu.find(a=>a.id===x.id);return m?{key:"legacy-"+m.id,menuItemId:m.id,name:m.name,unitPrice:m.price,qty:x.qty||1}:null}).filter(Boolean);rawCart=[]}
+function setCart(){sessionStorage.setItem("uno_cart",JSON.stringify(cart));let c=cart.reduce((a,x)=>a+x.qty,0),s=cart.reduce((a,x)=>a+x.unitPrice*x.qty,0);document.getElementById("count").textContent=c;document.getElementById("sum").textContent=money(s);let bar=document.getElementById("cartBar");bar.style.display=c?"flex":"none";if(c){bar.style.animation="none";requestAnimationFrame(()=>{bar.style.animation=""})}}
+async function loadMenu(){if(!sb){menu=demo;normalizeCart();renderCats();renderMenu();setCart();return}let {data,error}=await sb.from("menu_items").select("*").eq("is_available",true).order("sort_order").order("name");if(error){menu=demo;showErr(error.message)}else menu=data.map(x=>({id:x.id,name:x.name,cat:x.category,price:x.price,img:x.image_url||"logo.jpg",desc:x.description||""}));normalizeCart();renderCats();renderMenu();setCart();}
 const demo=[{id:1,name:"Trà sữa UNO",cat:"Trà sữa",price:35000,img:"logo.jpg",desc:"Món mẫu — hãy thay bằng menu của quán."},{id:2,name:"Trà đào cam sả",cat:"Trà trái cây",price:32000,img:"logo.jpg",desc:"Thanh mát, thơm đào và cam."},{id:3,name:"Matcha latte",cat:"Matcha",price:39000,img:"logo.jpg",desc:"Matcha đậm vị, sữa mịn."}];
 function baseName(name){return String(name||"").replace(/ \((?:Size (?:M|L|XL)|Suất [^)]+)\)$/i,"").trim()}
 function optionLabel(m){let x=String(m.name||"").match(/ \((Size (?:M|L|XL)|Suất [^)]+)\)$/i);return x?x[1]:""}
 function groupedMenu(){let groups=[];let map=new Map();for(let m of menu){if(m.cat==="Topping"||m.cat==="Topping thêm")continue;let key=m.cat+"||"+baseName(m.name);if(!map.has(key)){let g={key,name:baseName(m.name),cat:m.cat,img:m.img,desc:m.desc,variants:[]};map.set(key,g);groups.push(g)}map.get(key).variants.push(m)}return groups}
 function renderCats(){let cats=["Tất cả",...new Set(menu.filter(x=>x.cat!=="Topping"&&x.cat!=="Topping thêm").map(x=>x.cat))];let box=document.getElementById("cats");box.innerHTML=cats.map((c,i)=>`<button type="button" class="cat ${i?'':'active'}" data-cat="${esc(c)}">${esc(c)}</button>`).join("");box.querySelectorAll(".cat").forEach(b=>b.addEventListener("click",()=>cat(b,b.dataset.cat)))}
-function renderMenu(filter="Tất cả"){let d=groupedMenu();if(filter!=="Tất cả")d=d.filter(x=>x.cat===filter);document.getElementById("menu").innerHTML=d.map((g,i)=>{let min=Math.min(...g.variants.map(v=>+v.price));let multi=g.variants.length>1;return `<article class="card"><img class="pic" src="${esc(g.img)}" onerror="this.src='logo.jpg'"><div class="body"><div class="name">${esc(g.name)}</div><div class="desc">${esc(g.desc|| (multi?"Chọn size khi thêm món":""))}</div><div class="row mt"><span class="price">${multi?"Từ ":""}${money(min)}</span><button class="add" onclick="openOptions(${JSON.stringify(g.key)})">+ Thêm</button></div></div></article>`}).join("")||'<div class="empty">Chưa có món trong danh mục này.</div>'}
+function renderMenu(filter="Tất cả"){
+ let d=groupedMenu();if(filter!=="Tất cả")d=d.filter(x=>x.cat===filter);const box=document.getElementById("menu");
+ box.innerHTML=d.map(g=>{let min=Math.min(...g.variants.map(v=>+v.price));let multi=g.variants.length>1;let drink=isDrinkCat(g.cat);return `<article class="card" data-key="${encodeURIComponent(g.key)}" tabindex="0"><img class="pic" src="${esc(g.img)}" onerror="this.src='logo.jpg'"><div class="body"><div class="name">${esc(g.name)}</div><div class="desc">${esc(g.desc|| (multi?"Chọn size khi thêm món":""))}</div>${drink?'<div class="drink-note">Đồ uống đã bao gồm topping</div>':''}<div class="row mt"><span class="price">${multi?"Từ ":""}${money(min)}</span><button type="button" class="add">+ Chọn món</button></div></div></article>`}).join("")||'<div class="empty">Chưa có món trong danh mục này.</div>';
+ box.querySelectorAll(".card").forEach(card=>{let go=()=>openOptions(decodeURIComponent(card.dataset.key));card.addEventListener("click",e=>{if(e.target.closest("button")){e.stopPropagation()}go()});card.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();go()}})});
+}
 function cat(b,c){document.querySelectorAll(".cat").forEach(x=>x.classList.remove("active"));b.classList.add("active");renderMenu(c);b.scrollIntoView({behavior:"smooth",inline:"center",block:"nearest"})}
 let picking=null,pickVariant=null,pickToppings=[];
-function openOptions(key){let g=groupedMenu().find(x=>x.key===key);if(!g)return;picking=g;pickVariant=g.variants[0];pickToppings=[];document.getElementById("optionTitle").textContent=g.name;renderOptions();document.getElementById("optionModal").classList.add("open")}
-function closeOptions(){document.getElementById("optionModal").classList.remove("open")}
-function renderOptions(){let g=picking;if(!g)return;let sizes=g.variants.length>1?`<h3>Chọn loại / size</h3><div class="choice">${g.variants.map(v=>`<button type="button" class="${pickVariant&&pickVariant.id===v.id?'active':''}" onclick="pickSize(${v.id})">${esc(optionLabel(v)||v.name)} · ${money(v.price)}</button>`).join("")}</div>`:"";
-let drinkCats=["Trà sữa","Best Seller","Sinh tố","Trà trái cây","Matcha","Coffee","Nước ép","Sữa tươi","Sữa chua","Mojito"];let tops=drinkCats.includes(g.cat)?menu.filter(x=>x.cat==="Topping"):[];let topping=tops.length?`<h3>Topping (không bắt buộc)</h3>${tops.map(t=>`<label class="optrow"><span>${esc(t.name)} <b>+${money(t.price)}</b></span><input style="width:auto" type="checkbox" ${pickToppings.includes(t.id)?'checked':''} onchange="toggleTop(${t.id},this.checked)"></label>`).join("")}`:"";document.getElementById("optionBody").innerHTML=sizes+topping;document.getElementById("optionAdd").textContent=`Thêm vào giỏ · ${money((pickVariant?.price||0)+pickToppings.reduce((a,id)=>a+(menu.find(x=>x.id===id)?.price||0),0))}`}
+function openOptions(key){let g=groupedMenu().find(x=>x.key===key);if(!g)return;picking=g;pickVariant=g.variants[0];pickToppings=[];document.getElementById("optionTitle").textContent=g.name;renderOptions();document.getElementById("optionModal").classList.add("open");document.body.style.overflow="hidden"}
+function closeOptions(){document.getElementById("optionModal").classList.remove("open");document.body.style.overflow=""}
+function renderOptions(){let g=picking;if(!g)return;let sizes=g.variants.length>1?`<h3>Chọn size / loại</h3><div class="choice">${g.variants.map(v=>`<button type="button" class="${pickVariant&&pickVariant.id===v.id?'active':''}" onclick="pickSize(${v.id})">${esc(optionLabel(v)||v.name)} · ${money(v.price)}</button>`).join("")}</div>`:`<div class="option-summary"><b>${esc(optionLabel(pickVariant)||'Giá món')}</b><span class="option-price">${money(pickVariant?.price||0)}</span></div>`;
+let tops=isDrinkCat(g.cat)?menu.filter(x=>x.cat==="Topping"):g.cat==="Mì cay – Nem nướng"?menu.filter(x=>x.cat==="Topping thêm"):[];
+let topping=tops.length?`<h3>${isDrinkCat(g.cat)?'Chọn topping':'Topping thêm'}</h3>${isDrinkCat(g.cat)?'<div class="small" style="margin:-6px 0 8px">Đồ uống đã bao gồm topping. Chọn topping bạn muốn dùng kèm.</div>':''}${tops.map(t=>`<label class="optrow"><span>${esc(t.name)} <b>+${money(t.price)}</b></span><input style="width:auto" type="checkbox" ${pickToppings.includes(t.id)?'checked':''} onchange="toggleTop(${t.id},this.checked)"></label>`).join("")}`:"";
+let total=(pickVariant?.price||0)+pickToppings.reduce((a,id)=>a+(menu.find(x=>x.id===id)?.price||0),0);document.getElementById("optionBody").innerHTML=sizes+topping+`<div class="option-summary"><b>Tạm tính</b><span class="option-price">${money(total)}</span></div>`;document.getElementById("optionAdd").textContent=`Thêm vào giỏ · ${money(total)}`}
 function pickSize(id){pickVariant=menu.find(x=>x.id===id);renderOptions()}
 function toggleTop(id,on){pickToppings=on?[...pickToppings,id]:pickToppings.filter(x=>x!==id);renderOptions()}
-function confirmOptions(){if(!pickVariant)return;addLine(pickVariant.id,1);for(let id of pickToppings)addLine(id,1);closeOptions()}
-function addLine(id,qty=1){let x=cart.find(a=>a.id===id);x?x.qty+=qty:cart.push({id,qty});setCart()}
-function add(id){addLine(id,1)}
-function openCart(){document.getElementById("modal").classList.add("open");renderCart()}function closeCart(){document.getElementById("modal").classList.remove("open")}
-function renderCart(){document.getElementById("cartItems").innerHTML=cart.map(x=>{let m=menu.find(a=>a.id===x.id);return `<div class="item"><div><b>${esc(m.name)}</b><div class="small">${money(m.price)}</div></div><div class="qty"><button onclick="chg(${x.id},-1)">−</button><span>${x.qty}</span><button onclick="chg(${x.id},1)">+</button></div><b>${money(m.price*x.qty)}</b></div>`}).join("")||'<div class="empty">Chưa có món.</div>';document.getElementById("modalSum").textContent=document.getElementById("sum").textContent}
-function chg(id,d){let x=cart.find(a=>a.id===id);if(!x)return;x.qty+=d;if(x.qty<1)cart=cart.filter(a=>a.id!==id);setCart();renderCart()}
-async function placeOrder(){if(!cart.length)return alert("Giỏ hàng trống.");if(!sb)return alert("Website chưa kết nối Supabase. Hãy điền config.js.");const orderId=Date.now();const payload={id:orderId,table_number:String(table),status:"Mới",note:document.getElementById("note").value.trim()};let {error}=await sb.from("orders").insert(payload);if(error)return alert(error.message);let rows=cart.map(x=>{let m=menu.find(a=>a.id===x.id);return {order_id:orderId,menu_item_id:m.id,item_name:m.name,price:m.price,quantity:x.qty}});let r=await sb.from("order_items").insert(rows);if(r.error){await sb.from("orders").delete().eq("id",orderId);return alert(r.error.message)}cart=[];setCart();closeCart();document.getElementById("note").value="";alert("Đã gửi order thành công!")}
+function confirmOptions(){if(!pickVariant)return;let tops=pickToppings.map(id=>menu.find(x=>x.id===id)).filter(Boolean);let label=optionLabel(pickVariant);let name=picking.name+(label?` (${label})`:"")+(tops.length?` • ${tops.map(t=>t.name).join(", ")}`:"");let unitPrice=pickVariant.price+tops.reduce((a,t)=>a+t.price,0);let key=[pickVariant.id,...tops.map(t=>t.id).sort((a,b)=>a-b)].join("-");let x=cart.find(a=>a.key===key);x?x.qty++:cart.push({key,menuItemId:pickVariant.id,name,unitPrice,qty:1});setCart();closeOptions()}
+function openCart(){document.getElementById("modal").classList.add("open");document.body.style.overflow="hidden";renderCart()}function closeCart(){document.getElementById("modal").classList.remove("open");document.body.style.overflow=""}
+function renderCart(){document.getElementById("cartItems").innerHTML=cart.map((x,i)=>`<div class="item"><div><b>${esc(x.name)}</b><div class="small">${money(x.unitPrice)}</div></div><div class="qty"><button onclick="chg(${i},-1)">−</button><span>${x.qty}</span><button onclick="chg(${i},1)">+</button></div><b>${money(x.unitPrice*x.qty)}</b></div>`).join("")||'<div class="empty">Chưa có món.</div>';document.getElementById("modalSum").textContent=money(cart.reduce((a,x)=>a+x.unitPrice*x.qty,0))}
+function chg(i,d){let x=cart[i];if(!x)return;x.qty+=d;if(x.qty<1)cart.splice(i,1);setCart();renderCart()}
+async function placeOrder(){if(!cart.length)return alert("Giỏ hàng trống.");if(!sb)return alert("Website chưa kết nối Supabase. Hãy điền config.js.");const orderId=Date.now();const payload={id:orderId,table_number:String(table),status:"Mới",note:document.getElementById("note").value.trim()};let {error}=await sb.from("orders").insert(payload);if(error)return alert(error.message);let rows=cart.map(x=>({order_id:orderId,menu_item_id:x.menuItemId||null,item_name:x.name,price:x.unitPrice,quantity:x.qty}));let r=await sb.from("order_items").insert(rows);if(r.error){await sb.from("orders").delete().eq("id",orderId);return alert(r.error.message)}cart=[];setCart();closeCart();document.getElementById("note").value="";alert("Đã gửi order thành công!")}
 function esc(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]))}
 function showErr(x){console.warn(x)}
 
@@ -110,6 +127,9 @@ async function toggleItem(id,on){await sb.from("menu_items").update({is_availabl
 async function delItem(id){if(!confirm("Xóa món?"))return;await sb.from("menu_items").delete().eq("id",id);loadManage();loadMenu()}
 function renderQR(){let base=location.origin+location.pathname;document.getElementById("adminView").innerHTML=`<div class="panel"><h2>QR từng bàn</h2><p class="small">In từng QR và dán lên bàn. Khi deploy trên Vercel, QR sẽ trỏ về website thật.</p><div class="qrgrid">${Array.from({length:30},(_,i)=>i+1).map(n=>`<div class="qr"><b>Bàn ${n}</b><canvas id="q${n}"></canvas><button class="tab" onclick="printQR(${n})">In QR</button></div>`).join("")}</div></div>`;for(let n=1;n<=30;n++)QRCode.toCanvas(document.getElementById("q"+n),base+"?table="+n,{width:150,margin:1})}
 function printQR(n){let url=location.origin+location.pathname+"?table="+n;let w=open("","_blank");w.document.write(`<html><body style="text-align:center;font-family:Arial"><h1>UNO TEA</h1><h2>BÀN ${n}</h2><canvas id="c"></canvas><p>Quét QR để gọi món</p><script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"><\/script><script>QRCode.toCanvas(document.getElementById('c'),'${url}',{width:350},()=>setTimeout(()=>print(),300))<\/script></body></html>`);w.document.close()}
+document.getElementById("optionModal").addEventListener("click",e=>{if(e.target===e.currentTarget)closeOptions()});
+document.getElementById("modal").addEventListener("click",e=>{if(e.target===e.currentTarget)closeCart()});
+document.addEventListener("keydown",e=>{if(e.key==="Escape"){closeOptions();closeCart()}});
 document.querySelectorAll(".tab[data-v]").forEach(b=>b.onclick=()=>showAdmin(b.dataset.v));
 if(params.get("admin")==="1"){document.getElementById("customer").style.display="none";document.getElementById("cartBar").style.display="none";document.getElementById("admin").style.display="block";if(sb)sb.auth.getSession().then(({data})=>{if(data.session)adminUI()})}
 if(sb){loadMenu();channel=sb.channel("uno-orders").on("postgres_changes",{event:"*",schema:"public",table:"orders"},()=>{if(document.getElementById("admin").style.display==="block"&&document.getElementById("dash").style.display!=="none")showAdmin(adminView)}).subscribe()}else{loadMenu();document.getElementById("menu").insertAdjacentHTML("beforebegin",'<div class="notice">Bản đã dựng xong. Để chạy online, hãy điền Supabase URL + anon key trong <b>config.js</b>.</div>')}
