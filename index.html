@@ -2,7 +2,7 @@
 <html lang="vi">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#111"><title>UNO TEA • Order</title><link rel="icon" href="logo.jpg">
+<meta name="theme-color" content="#111"><title>UnNo Tea • Order</title><link rel="icon" href="logo.jpg">
 <style>
 :root{--bg:#f5f3ee;--card:#fff;--ink:#111;--muted:#747474;--line:#e5e1d8;--soft:#efede7;--ok:#1f7a45;--danger:#b42318}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}button,input,select,textarea{font:inherit}button{cursor:pointer}
@@ -45,7 +45,7 @@ main{max-width:1120px;margin:auto;padding:20px 16px 100px}.hero{display:flex;ali
 </style>
 </head>
 <body>
-<header><div class="nav"><img class="logo" src="logo.jpg"><div><div class="brand">UNO TEA</div><div class="small">Order tại bàn • Est. 2021</div></div><div id="table" class="table">Bàn —</div></div></header>
+<header><div class="nav"><img class="logo" src="logo.jpg"><div><div class="brand">UnNo Tea</div><div class="small">Order tại bàn • Est. 2021</div></div><div id="table" class="table">Bàn —</div></div></header>
 
 <main id="customer">
 <section class="hero"><img src="logo.jpg"><div><h1>Menu hôm nay</h1><p>Quét QR, chọn món và gửi order trực tiếp cho quán.</p></div></section>
@@ -54,7 +54,7 @@ main{max-width:1120px;margin:auto;padding:20px 16px 100px}.hero{display:flex;ali
 
 <main id="admin">
 <div id="loginBox" class="login panel">
-<h2>UNO TEA Admin</h2><p class="small">Đăng nhập bằng tài khoản Supabase Auth của quán.</p>
+<h2>UnNo Tea Admin</h2><p class="small">Đăng nhập bằng tài khoản Supabase Auth của quán.</p>
 <input id="email" type="email" placeholder="Email"><br><br><input id="password" type="password" placeholder="Mật khẩu"><br><br>
 <button class="primary" onclick="login()">Đăng nhập</button><div id="loginMsg"></div>
 </div>
@@ -84,7 +84,7 @@ function isDrinkCat(cat){return drinkCats.includes(cat)}
 function normalizeCart(){cart=(rawCart||[]).map(x=>{if(x.unitPrice!=null)return x;let m=menu.find(a=>a.id===x.id);return m?{key:"legacy-"+m.id,menuItemId:m.id,name:m.name,unitPrice:m.price,qty:x.qty||1}:null}).filter(Boolean);rawCart=[]}
 function setCart(){sessionStorage.setItem("uno_cart",JSON.stringify(cart));let c=cart.reduce((a,x)=>a+x.qty,0),s=cart.reduce((a,x)=>a+x.unitPrice*x.qty,0);document.getElementById("count").textContent=c;document.getElementById("sum").textContent=money(s);let bar=document.getElementById("cartBar");bar.style.display=c?"flex":"none";if(c){bar.style.animation="none";requestAnimationFrame(()=>{bar.style.animation=""})}}
 async function loadMenu(){if(!sb){menu=demo;normalizeCart();renderCats();renderMenu();setCart();return}let {data,error}=await sb.from("menu_items").select("*").eq("is_available",true).order("sort_order").order("name");if(error){menu=demo;showErr(error.message)}else menu=data.map(x=>({id:x.id,name:x.name,cat:x.category,price:x.price,img:x.image_url||"logo.jpg",desc:x.description||""}));normalizeCart();renderCats();renderMenu();setCart();}
-const demo=[{id:1,name:"Trà sữa UNO",cat:"Trà sữa",price:35000,img:"logo.jpg",desc:"Món mẫu — hãy thay bằng menu của quán."},{id:2,name:"Trà đào cam sả",cat:"Trà trái cây",price:32000,img:"logo.jpg",desc:"Thanh mát, thơm đào và cam."},{id:3,name:"Matcha latte",cat:"Matcha",price:39000,img:"logo.jpg",desc:"Matcha đậm vị, sữa mịn."}];
+const demo=[{id:1,name:"Trà sữa UnNo",cat:"Trà sữa",price:35000,img:"logo.jpg",desc:"Món mẫu — hãy thay bằng menu của quán."},{id:2,name:"Trà đào cam sả",cat:"Trà trái cây",price:32000,img:"logo.jpg",desc:"Thanh mát, thơm đào và cam."},{id:3,name:"Matcha latte",cat:"Matcha",price:39000,img:"logo.jpg",desc:"Matcha đậm vị, sữa mịn."}];
 function baseName(name){return String(name||"").replace(/ \((?:Size (?:M|L|XL)|Suất [^)]+)\)$/i,"").trim()}
 function optionLabel(m){let x=String(m.name||"").match(/ \((Size (?:M|L|XL)|Suất [^)]+)\)$/i);return x?x[1]:""}
 function groupedMenu(){let groups=[];let map=new Map();for(let m of menu){if(m.cat==="Topping"||m.cat==="Topping thêm")continue;let key=m.cat+"||"+baseName(m.name);if(!map.has(key)){let g={key,name:baseName(m.name),cat:m.cat,img:m.img,desc:m.desc,variants:[]};map.set(key,g);groups.push(g)}map.get(key).variants.push(m)}return groups}
@@ -126,7 +126,7 @@ async function addMenu(){let name=mn.value.trim(),price=+mp.value,category=mc.va
 async function toggleItem(id,on){await sb.from("menu_items").update({is_available:on}).eq("id",id);loadManage();loadMenu()}
 async function delItem(id){if(!confirm("Xóa món?"))return;await sb.from("menu_items").delete().eq("id",id);loadManage();loadMenu()}
 function renderQR(){let base=location.origin+location.pathname;document.getElementById("adminView").innerHTML=`<div class="panel"><h2>QR từng bàn</h2><p class="small">In từng QR và dán lên bàn. Khi deploy trên Vercel, QR sẽ trỏ về website thật.</p><div class="qrgrid">${Array.from({length:30},(_,i)=>i+1).map(n=>`<div class="qr"><b>Bàn ${n}</b><canvas id="q${n}"></canvas><button class="tab" onclick="printQR(${n})">In QR</button></div>`).join("")}</div></div>`;for(let n=1;n<=30;n++)QRCode.toCanvas(document.getElementById("q"+n),base+"?table="+n,{width:150,margin:1})}
-function printQR(n){let url=location.origin+location.pathname+"?table="+n;let w=open("","_blank");w.document.write(`<html><body style="text-align:center;font-family:Arial"><h1>UNO TEA</h1><h2>BÀN ${n}</h2><canvas id="c"></canvas><p>Quét QR để gọi món</p><script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"><\/script><script>QRCode.toCanvas(document.getElementById('c'),'${url}',{width:350},()=>setTimeout(()=>print(),300))<\/script></body></html>`);w.document.close()}
+function printQR(n){let url=location.origin+location.pathname+"?table="+n;let w=open("","_blank");w.document.write(`<html><body style="text-align:center;font-family:Arial"><h1>UnNo Tea</h1><h2>BÀN ${n}</h2><canvas id="c"></canvas><p>Quét QR để gọi món</p><script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"><\/script><script>QRCode.toCanvas(document.getElementById('c'),'${url}',{width:350},()=>setTimeout(()=>print(),300))<\/script></body></html>`);w.document.close()}
 document.getElementById("optionModal").addEventListener("click",e=>{if(e.target===e.currentTarget)closeOptions()});
 document.getElementById("modal").addEventListener("click",e=>{if(e.target===e.currentTarget)closeCart()});
 document.addEventListener("keydown",e=>{if(e.key==="Escape"){closeOptions();closeCart()}});
